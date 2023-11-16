@@ -1,6 +1,8 @@
 import { useState } from 'react';
+
 export default function Picture() {
-  const [isActive,setIsActive]=useState(false);
+  const [isActive, setIsActive] = useState(false);
+
   let backgroundClassName = 'background';
   let pictureClassName = 'picture';
   if (isActive) {
@@ -8,9 +10,11 @@ export default function Picture() {
   } else {
     backgroundClassName += ' background--active';
   }
+
   return (
-    <div className= {backgroundClassName}
-      onclick={() => setIsActive(false)}
+    <div
+      className={backgroundClassName}
+      onClick={() => setIsActive(false)}
     >
       <img
         className={pictureClassName}
@@ -20,6 +24,7 @@ export default function Picture() {
           e.stopPropagation();
           setIsActive(true);
         }}
+        
       />
     </div>
   );
