@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<limits.h>
+#include<stdbool.h>
+
 typedef struct {
     int Known;
     int Min;
@@ -8,51 +10,6 @@ typedef struct {
     int Path;
     int SecPath;
 }Node;
-typedef struct
-{
-    int size;
-    int *arr;
-    int *index;
-} H;
-void Insert(Node X, H * tree,int index)
-{
-    int i;
-    for (i = ++tree->size; tree->arr[i / 2] > X.Min; i /= 2){
-        tree->arr[i] = tree->arr[i / 2];
-    }
-    tree->arr[i] = X.Min;
-    // printf("Insert %d Position %d\n", X, i);
-}
-int DeleteMin(H *tree)
-{
-    int i, Child;
-    int MinElement, LastElement;
-    MinElement = tree->arr[1];
-    // for(int i=0;i<=tree->size;i++){
-    //     printf("%d ",tree->arr[i]);
-    // }
-    // printf("Delete %d Size %d\n", MinElement, tree->size);
-    
-    LastElement = tree->arr[tree->size--];
-    for (i = 1; i * 2 <= tree->size; i = Child)
-    {
-        Child = i * 2;
-        if (Child != tree->size && tree->arr[Child + 1] < tree->arr[Child])
-        {
-            Child++;
-        }
-        if (LastElement > tree->arr[Child])
-        {
-            tree->arr[i] = tree->arr[Child];
-        }
-        else
-        {
-            break;
-        }
-    }
-    tree->arr[i] = LastElement;
-    return MinElement;
-}
 int add(int num1,int num2){
     if(num1==INT_MAX||num2==INT_MAX){
         return INT_MAX;
@@ -73,10 +30,6 @@ int FindMin(Node * node,int size){
 int main(){
     int m,n;
     scanf("%d %d",&m,&n);
-    H tree;
-    tree.size = 0;
-    tree.arr = (int *)malloc(sizeof(int) * (m + 1));
-    tree.arr[0] = 0;
     Node* node=(Node*)malloc(sizeof(Node)*(m+1));
     for(int i=1;i<=m;i++){
         node[i].Min=node[i].Sec=INT_MAX;
