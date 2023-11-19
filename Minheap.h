@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MinData -1
 typedef struct HeapStruct *PriorityQueue;
 struct HeapStruct {
     int *Elements;
@@ -8,6 +7,14 @@ struct HeapStruct {
     int Capacity;
     int Size;
 };
+typedef struct {
+    int Min;
+    int Sec;
+    int Path;
+    int SecPath;
+    int InQueue;
+}Node;
+Node* node;
 PriorityQueue Initialize( int MaxElements ){ 
      PriorityQueue  H; 
      H = (PriorityQueue)malloc( sizeof ( struct HeapStruct ) ); 
@@ -15,7 +22,7 @@ PriorityQueue Initialize( int MaxElements ){
      H->Index = (int *)malloc(( MaxElements + 1 ) * sizeof(int)); 
      H->Capacity = MaxElements; 
      H->Size = 0; 
-     H->Elements[ 0 ] = MinData; 
+     H->Elements[0] = -1; 
      return  H; 
 }
 void PercolateUp( int p, PriorityQueue H ){
@@ -55,8 +62,17 @@ void PercolateDown( int p, PriorityQueue H ){
         // printf("%d %d\n",num,H->Elements[num]);
     }
 }
+void EnQueue( int X, PriorityQueue H ,int Ind) 
+{
+    if(!node[Ind].InQueue){
+        Insert(X,H,Ind);
+        node[Ind].InQueue=1;
+    }
+}
+
 void Insert( int X, PriorityQueue H ,int Ind) 
 {
+    // printf("Insert:%d Index:%d\n",X,Ind);
     int p = ++H->Size;
     H->Elements[p] = X;
     H->Index[p] = Ind;
@@ -66,10 +82,14 @@ void Insert( int X, PriorityQueue H ,int Ind)
 
 int DeleteMin( PriorityQueue H ) 
 { 
+
     int MinElement = H->Index[1];
     H->Index[1] = H->Index[H->Size];
     H->Elements[1] = H->Elements[H->Size--];
     PercolateDown( 1, H );
+    node[MinElement].InQueue=0;
+    // printf("Del:%d",MinElement);
+
     return MinElement;
 }
 // int main()
