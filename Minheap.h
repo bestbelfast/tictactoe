@@ -23,7 +23,7 @@ PriorityQueue Initialize( int MaxElements ){
      H->Capacity = MaxElements; 
      H->Size = 0; 
      H->Elements[0] = -1; 
-     return  H; 
+     return H; 
 }
 void PercolateUp( int p, PriorityQueue H ){
     int num=p;
@@ -72,7 +72,6 @@ void EnQueue( int X, PriorityQueue H ,int Ind)
 
 void Insert( int X, PriorityQueue H ,int Ind) 
 {
-    // printf("Insert:%d Index:%d\n",X,Ind);
     int p = ++H->Size;
     H->Elements[p] = X;
     H->Index[p] = Ind;
@@ -88,31 +87,5 @@ int DeleteMin( PriorityQueue H )
     H->Elements[1] = H->Elements[H->Size--];
     PercolateDown( 1, H );
     node[MinElement].InQueue=0;
-    // printf("Del:%d",MinElement);
-
     return MinElement;
 }
-// int main()
-// {
-//     int n, i, op, X,m=0;
-//     PriorityQueue H;
-
-//     scanf("%d", &n);
-//     H = Initialize(n);
-//     for ( i=0; i<n; i++ ) {
-//         scanf("%d", &op);
-//         switch( op ) {
-//         case 1:
-//             scanf("%d", &X);
-//             Insert(X, H,++m);
-//             break;
-//         case 0:
-//             printf("%d ", DeleteMin(H));
-//             break;
-//         }
-//     }
-//     printf("\nInside H:");
-//     for ( i=1; i<=H->Size; i++ )
-//         printf(" %d", H->Elements[i]);
-//     return 0;
-// }
