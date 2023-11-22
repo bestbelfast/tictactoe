@@ -28,7 +28,7 @@ int main(){
         Edge[A][B]=Edge[B][A]=D;
     }
 
-    node[1].Min=node[1].Sec=node[1].SecPath=node[1].Path=0;
+    node[1].Min=node[1].SecPath=node[1].Path=0;
     PriorityQueue H = Initialize(m);
 
     Insert(0,H,1);

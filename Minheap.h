@@ -75,7 +75,6 @@ void Insert( int X, PriorityQueue H ,int Ind)
     int p = ++H->Size;
     H->Elements[p] = X;
     H->Index[p] = Ind;
-    
     PercolateUp( p, H );
 }
 
