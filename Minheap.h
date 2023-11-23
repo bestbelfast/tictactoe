@@ -13,6 +13,7 @@ typedef struct {
     int Path;
     int SecPath;
     int InQueue;
+    int isCircle;
 }Node;
 Node* node;
 PriorityQueue Initialize( int MaxElements ){ 
